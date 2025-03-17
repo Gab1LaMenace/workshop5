@@ -16,15 +16,11 @@ export async function node(
   node.use(express.json());
   node.use(bodyParser.json());
 
-  // Define initial node state
-  let nodeState = {
-    killed: false,
-    x: initialValue,
-    decided: null,
-    k: 0,
-  };
 
-  // Route: Get node status
+  // TODO implement this
+  // this route allows retrieving the current status of the node
+  // node.get("/status", (req, res) => {});
+
   node.get("/status", (req, res) => {
     if (isFaulty) {
       return res.status(500).send("faulty"); // Send a plain string to match test expectations
@@ -32,6 +28,12 @@ export async function node(
     return res.status(200).send("live");
   });
 
+  let nodeState = {
+    killed: false,
+    x: initialValue,
+    decided: null,
+    k: 0,
+  };
   // Route: Get current state of node
   node.get("/getState", (req, res) => {
     if (isFaulty) {
@@ -45,6 +47,24 @@ export async function node(
     return res.json(nodeState);
   });
 
+  // TODO implement this
+  // this route allows the node to receive messages from other nodes
+  // node.post("/message", (req, res) => {});
+
+  // TODO implement this
+  // this route is used to start the consensus algorithm
+  // node.get("/start", async (req, res) => {});
+
+  // TODO implement this
+  // this route is used to stop the consensus algorithm
+  // node.get("/stop", async (req, res) => {});
+
+  // TODO implement this
+  // get the current state of a node
+  // node.get("/getState", (req, res) => {});
+  // Define initial node state
+
+  //originally here
   // Start the server
   const server = node.listen(BASE_NODE_PORT + nodeId, async () => {
     console.log(
